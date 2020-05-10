@@ -136,6 +136,7 @@ def main():
                 vk.messages.send(user_id=uid,
                                  message=f"{vk2.wall.get(owner_id='-194651076', count='2')['items'][1]['text']}",
                                  random_id=get_random_id())
+    main()
 
 if __name__ == '__main__':
     main()
