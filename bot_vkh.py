@@ -5,24 +5,27 @@ import random, json
 
 users_data = {}
 
+
 def button(label, color):
     return {"action": {
-                    "type": "text",
-                    "payload": "{\"button\": \"2\"}",
-                    "label": label
-                },
-                "color": color
-            }
+        "type": "text",
+        "payload": "{\"button\": \"2\"}",
+        "label": label
+    },
+        "color": color
+    }
+
+
 keyboard = {
     "one_time": False,
     "buttons": [
         [{
-                "action": {
-                    "type": "text",
-                    "payload": "{\"button\": \"1\"}",
-                    "label": "1"
-                },
+            "action": {
+                "type": "text",
+                "payload": "{\"button\": \"1\"}",
+                "label": "1"
             },
+        },
             {
                 "action": {
                     "type": "text",
@@ -51,6 +54,7 @@ keyboard = {
 keyboard = json.dumps(keyboard, ensure_ascii=False).encode('utf-8')
 keyboard = str(keyboard.decode('utf-8'))
 
+
 def main():
     print('Как скажите')
     rules = f'{random.choice(["Куда встал? Сиди пиши правила", "Ладно сидим и пишем это гов...", "А игру кто-нибудь деелает?"])}'
@@ -59,6 +63,10 @@ def main():
         token='bb37681562bc4a86332f6e6ca1e9110af1e817d2dd7872f1fba77fb13df2e4d15a94e4d4aed37f9040816')
     vk = vk_session.get_api()
     long_poll = VkBotLongPoll(vk_session, gruop_id)
+    vk_session2 = vk_api.VkApi('+79649932510', 'PolkaSpolki2')
+    vk_session2.auth()
+    vk2 = vk_session2.get_api()
+
     for event in long_poll.listen():
         if event.type == VkBotEventType.MESSAGE_NEW:
             msg = event.message
@@ -124,11 +132,10 @@ def main():
                                  message=f'Ну там есть Илья, Иван и Леха',
                                  random_id=get_random_id())
             elif msg['text'] == '4':
-                f1 = open('news.txt', 'r')
+
                 vk.messages.send(user_id=uid,
-                                 message=f'{f1.read()}',
+                                 message=f"{vk2.wall.get(owner_id='-194651076', count='2')['items'][1]['text']}",
                                  random_id=get_random_id())
-                f1.close()
 
 if __name__ == '__main__':
     main()
