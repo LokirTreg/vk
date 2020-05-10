@@ -18,7 +18,15 @@ def button(label, color):
 
 keyboard = {
     "one_time": False,
-    "buttons": [
+    "buttons": [[
+        {
+            "action": {
+            "type": "text",
+            "payload": "{\"button\": \"1\"}",
+            "label": "Комманды"
+            },
+            "color": "primary"
+        }],
         [{
             "action": {
                 "type": "text",
@@ -66,13 +74,12 @@ def main():
     vk_session2 = vk_api.VkApi('+79649932510', 'PolkaSpolki2')
     vk_session2.auth()
     vk2 = vk_session2.get_api()
-
     for event in long_poll.listen():
         if event.type == VkBotEventType.MESSAGE_NEW:
             msg = event.message
             uid = msg.from_id
             user = vk.users.get(user_ids=uid, fields=['city'])[0]
-            if msg['text'] not in ['1', '2', '3', '4']:
+            if msg['text'] not in ['Комманды', '1', '2', '3', '4']:
                 vk.messages.send(user_id=uid,
                                  message=f'Привет, {user["first_name"]} {user["last_name"]}',
                                  random_id=get_random_id())
@@ -86,38 +93,23 @@ def main():
                                  message=f'Вот список команд',
                                  random_id=get_random_id(),
                                  keyboard=keyboard)
+            elif msg['text'] == 'Комманды':
                 vk.messages.send(user_id=uid,
                                  message=f'Вот список команд',
                                  random_id=get_random_id())
                 vk.messages.send(user_id=uid,
-                                 message=f'1 - Список команд',
+                                 message=f'1 - Правила игры',
                                  random_id=get_random_id())
                 vk.messages.send(user_id=uid,
-                                 message=f'2 - Правила игры',
+                                 message=f'2 - Инффа о разрабах',
                                  random_id=get_random_id())
                 vk.messages.send(user_id=uid,
-                                 message=f'3 - Инффа о разрабах',
+                                 message=f'3 - Последняя новость',
                                  random_id=get_random_id())
                 vk.messages.send(user_id=uid,
-                                 message=f'4 - Последняя новость',
+                                 message=f'4 - Важная новость',
                                  random_id=get_random_id())
             elif msg['text'] == '1':
-                vk.messages.send(user_id=uid,
-                                 message=f'Вот список команд',
-                                 random_id=get_random_id())
-                vk.messages.send(user_id=uid,
-                                 message=f'1 - Список команд',
-                                 random_id=get_random_id())
-                vk.messages.send(user_id=uid,
-                                 message=f'2 - Правила игры',
-                                 random_id=get_random_id())
-                vk.messages.send(user_id=uid,
-                                 message=f'3 - Инффа о разрабах',
-                                 random_id=get_random_id())
-                vk.messages.send(user_id=uid,
-                                 message=f'4 - Последняя новость',
-                                 random_id=get_random_id())
-            elif msg['text'] == '2':
                 vk.messages.send(user_id=uid,
                                  message=f'Z--z-z-z-z-z-z-z-z--z-z-z-z--z-z-z-z-z--z-z-z',
                                  random_id=get_random_id())
@@ -127,16 +119,19 @@ def main():
                 vk.messages.send(user_id=uid,
                                  message=rules,
                                  random_id=get_random_id())
-            elif msg['text'] == '3':
+            elif msg['text'] == '2':
                 vk.messages.send(user_id=uid,
                                  message=f'Ну там есть Илья, Иван и Леха',
                                  random_id=get_random_id())
-            elif msg['text'] == '4':
-
+            elif msg['text'] == '3':
                 vk.messages.send(user_id=uid,
                                  message=f"{vk2.wall.get(owner_id='-194651076', count='2')['items'][1]['text']}",
                                  random_id=get_random_id())
-    main()
+            elif msg['text'] == '4':
+                vk.messages.send(user_id=uid,
+                                 message=f"{vk2.wall.get(owner_id='-194651076', count='2')['items'][0]['text']}",
+                                 random_id=get_random_id())
+                
 
 if __name__ == '__main__':
     main()
