@@ -111,9 +111,6 @@ def main():
                                  random_id=get_random_id())
             elif msg['text'] == '1':
                 vk.messages.send(user_id=uid,
-                                 message=f'Z--z-z-z-z-z-z-z-z--z-z-z-z--z-z-z-z-z--z-z-z',
-                                 random_id=get_random_id())
-                vk.messages.send(user_id=uid,
                                  message=rules,
                                  random_id=get_random_id())
             elif msg['text'] == '2':
