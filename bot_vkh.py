@@ -65,7 +65,7 @@ keyboard = str(keyboard.decode('utf-8'))
 
 def main():
     print('Как скажите')
-    rules = f'{random.choice(["Куда встал? Сиди пиши правила", "Ладно сидим и пишем это гов...", "А игру кто-нибудь деелает?"])}'
+    rules = f'Игрок передвигает кубиком на экране с помощью WASD – стандартной раскладки для игр. При движении мышью с зажатой кнопкой вращается камера. Для получения очков надо собирать красные кубики, который еще и ускоряют игрока, что усложняет действо сие.'
     gruop_id = 194651076
     vk_session = vk_api.VkApi(
         token='bb37681562bc4a86332f6e6ca1e9110af1e817d2dd7872f1fba77fb13df2e4d15a94e4d4aed37f9040816')
@@ -112,9 +112,6 @@ def main():
             elif msg['text'] == '1':
                 vk.messages.send(user_id=uid,
                                  message=f'Z--z-z-z-z-z-z-z-z--z-z-z-z--z-z-z-z-z--z-z-z',
-                                 random_id=get_random_id())
-                vk.messages.send(user_id=uid,
-                                 message=f'Пацаны он ушел?',
                                  random_id=get_random_id())
                 vk.messages.send(user_id=uid,
                                  message=rules,
